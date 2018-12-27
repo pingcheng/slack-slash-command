@@ -1,5 +1,5 @@
 {
-    "name": "pingcheng/slack-slack-command",
+    "name": "pingcheng/slack-slash-command",
     "description": "Laravel slack slash command plugin",
     "type": "library",
     "authors": [
