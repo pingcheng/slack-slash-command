@@ -25,7 +25,7 @@ class RequestValidator
         $version = 'v0';
 
         // load the secret, you also can load it from env(YOUR_OWN_SLACK_SECRET)
-        $secret = config('services.slack.signing_secret');
+        $secret = config('slackslashcommand.signing_secret');
 
         // get the payload
         $body = $request->getContent();
