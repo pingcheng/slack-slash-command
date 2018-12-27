@@ -1,0 +1,22 @@
+{
+    "name": "pingcheng/slack-slack-command",
+    "description": "Laravel slack slash command plugin",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ping Cheng",
+            "email": "ping.che@hotmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "PingCheng\\SlackSlashCommand\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PingCheng\\SlackSlashCommand\\Tests\\": "tests/"
+        }
+    }
+}
