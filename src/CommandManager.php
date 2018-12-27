@@ -13,6 +13,8 @@ class CommandManager
      * and then execute it
      *
      * @param Request $request
+     *
+     * @return mixed
      */
     public static function run(Request $request = null) {
         $manager = new static();
@@ -22,7 +24,7 @@ class CommandManager
         }
 
         $manager->validate($request);
-        $manager->process($request->all());
+        return $manager->process($request->all());
     }
 
     /**
