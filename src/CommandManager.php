@@ -2,21 +2,39 @@
 
 namespace PingCheng\SlackSlashCommand;
 
+use Illuminate\Http\Request;
 use PingCheng\SlackSlashCommand\Exceptions\CommandNotFoundException;
-use PingCheng\SlackSlashCommand\Exceptions\PermissionRequiredException;
 
 class CommandManager
 {
+
     /**
-     * @param $payload
+     * find the related command class
+     * and then execute it
      *
-     * @throws CommandNotFoundException
+     * @param Request $request
      */
-    public static function run($payload) {
+    public static function run(Request $request = null) {
         $manager = new static();
 
-        $command_name = $manager->getCommandFromPayLoad($payload);
-        $command_class = $manager->getCommandClass($command_name);
+        if ($request === null) {
+            $request = request();
+        }
+
+        $manager->validate($request);
+        $manager->process($request->all());
+    }
+
+    /**
+     *
+     * @param $payload
+     *
+     * @return mixed
+     * @throws CommandNotFoundException
+     */
+    public function process($payload) {
+        $command_name = $this->getCommandFromPayLoad($payload);
+        $command_class = $this->getCommandClass($command_name);
 
         if ($command_class === null) {
             throw new CommandNotFoundException("Command {$command_name} is not found");
@@ -27,10 +45,31 @@ class CommandManager
         return $command->handle();
     }
 
+    /**
+     * @param Request $request
+     *
+     * @throws Exceptions\InvalidHeadersException
+     */
+    public function validate(Request $request) {
+        RequestValidator::validate($request);
+    }
+
+    /**
+     * load the command list from the config file
+     *
+     * @return mixed
+     */
     public function loadCommandList() {
         return config('slackslashcommand.commands');
     }
 
+    /**
+     * get the command class name based on the command name
+     *
+     * @param $command
+     *
+     * @return string|null
+     */
     public function getCommandClass($command) {
         $commands = $this->loadCommandList();
 
@@ -41,6 +80,13 @@ class CommandManager
         return null;
     }
 
+    /**
+     * get the command name from the slack payload
+     *
+     * @param $payload
+     *
+     * @return string
+     */
     public function getCommandFromPayLoad($payload) {
         return ltrim($payload['command'], '/');
     }

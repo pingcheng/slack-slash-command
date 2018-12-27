@@ -26,6 +26,11 @@ abstract class SlackSlackCommand
     protected $limit_on_channel_ids = [];
     protected $limit_on_user_ids = [];
 
+    /**
+     * need to be defined in the actual command class
+     *
+     * @return mixed
+     */
     abstract public function handle();
 
     /**
@@ -42,6 +47,8 @@ abstract class SlackSlackCommand
     }
 
     /**
+     * check the command permission
+     *
      * @throws PermissionRequiredException
      */
     protected function checkPermissions() {
@@ -58,6 +65,11 @@ abstract class SlackSlackCommand
         }
     }
 
+    /**
+     * process the payload
+     *
+     * @param $payload
+     */
     protected function loadPayload($payload) {
         $fillable = ['token', 'team_id', 'team_domain', 'enterprise_id', 'enterprise_name', 'channel_id', 'channel_name', 'user_id', 'user_name', 'command', 'text', 'response_url', 'trigger'];
         foreach ($payload as $key => $value) {
