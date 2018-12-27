@@ -24,7 +24,7 @@ class CommandManager
 
         /* @var \PingCheng\SlackSlashCommand\SlackSlackCommand $command */
         $command = new $command_class($payload);
-        $command->handle();
+        return $command->handle();
     }
 
     public function loadCommandList() {
