@@ -20,6 +20,6 @@ class SlackMessageBuilder extends SlackWebhookChannel
 
     public static function build(SlackMessage $message) {
         $builder = new static();
-        return $builder->buildJsonPayload($message);
+        return $builder->buildJsonPayload($message)['json'];
     }
 }
