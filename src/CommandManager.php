@@ -3,6 +3,7 @@
 namespace PingCheng\SlackSlashCommand;
 
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\SlackMessage;
 use PingCheng\SlackSlashCommand\Exceptions\CommandNotFoundException;
 
 class CommandManager
@@ -44,7 +45,14 @@ class CommandManager
 
         /* @var \PingCheng\SlackSlashCommand\SlackSlackCommand $command */
         $command = new $command_class($payload);
-        return $command->handle();
+        $result = $command->handle();
+
+        // parse to json format if the result is a SlackMessage
+        if (is_a($result, SlackMessage::class)) {
+            $result = SlackMessageBuilder::build($result);
+        }
+
+        return $result;
     }
 
     /**
