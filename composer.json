@@ -8,9 +8,11 @@
             "email": "ping.che@hotmail.com"
         }
     ],
-    "require": {},
+    "require": {
+    },
     "require-dev": {
-        "phpunit/phpunit": "5.7.27"
+        "phpunit/phpunit": "5.7.27",
+        "php-coveralls/php-coveralls": "^2.1"
     },
     "autoload": {
         "psr-4": {
