@@ -14,7 +14,7 @@ script:
   - cd vendor
   - cd pingcheng
   - cd slack-slash-command
-  - git chekcout $TRAVIS_BRANCH
+  - git checkout $TRAVIS_BRANCH
   - composer install
   - php ../../../vendor/bin/phpunit --coverage-text
   - php vendor/bin/php-coveralls -v
