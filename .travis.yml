@@ -2,9 +2,12 @@ language: php
 
 php:
   - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
 
 script:
-  - composer create-project --prefer-dist laravel/laravel laravel_test "5.4.*"
+  - composer create-project --prefer-dist laravel/laravel laravel_test
   - cd laravel_test
   - composer require pingcheng/slack-slash-command
   - php artisan vendor:publish --provider="PingCheng\SlackSlashCommand\SlackSlashCommandServiceProvider"
