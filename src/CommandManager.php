@@ -43,7 +43,7 @@ class CommandManager
             throw new CommandNotFoundException("Command {$command_name} is not found");
         }
 
-        /* @var \PingCheng\SlackSlashCommand\SlackSlackCommand $command */
+        /* @var \PingCheng\SlackSlashCommand\SlackSlashCommand $command */
         $command = new $command_class($payload);
         $result = $command->handle();
 

@@ -6,7 +6,7 @@
  * Time: 23:25
  */
 
-class TestingSampleCommand extends \PingCheng\SlackSlashCommand\SlackSlackCommand
+class TestingSampleSlashCommand extends \PingCheng\SlackSlashCommand\SlackSlashCommand
 {
 
     /**

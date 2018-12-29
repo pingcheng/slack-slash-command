@@ -14,8 +14,15 @@ class TestBase extends \Tests\TestCase
 
     protected function loadSampleCommandConfig() {
         config(['slackslashcommand.commands' => [
-            'sample' => TestingSampleCommand::class,
-            'channel' => TestingChannelPermissionCommand::class,
+            'sample' => TestingSampleSlashCommand::class,
+            'channel' => TestingChannelPermissionSlashCommand::class,
+        ]]);
+    }
+
+    protected function loadTestingCommandConfig() {
+        config(['slackslashcommand.commands' => [
+            'user_permission' => TestingUserPermissionSlashCommand::class,
+            'slack_message_response' => TestingSlackMessageResponseSlashCommand::class,
         ]]);
     }
 

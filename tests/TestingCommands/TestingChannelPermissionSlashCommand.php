@@ -6,7 +6,7 @@
  * Time: 23:40
  */
 
-class TestingChannelPermissionCommand extends \PingCheng\SlackSlashCommand\SlackSlackCommand
+class TestingChannelPermissionSlashCommand extends \PingCheng\SlackSlashCommand\SlackSlashCommand
 {
 
     protected $limit_on_channel_ids = ['1234'];

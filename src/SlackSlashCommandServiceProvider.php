@@ -7,7 +7,7 @@ class SlackSlashCommandServiceProvider extends \Illuminate\Support\ServiceProvid
     public function boot() {
         $this->publishes([
             __DIR__.'/../config/slackslashcommand.php' => config_path('slackslashcommand.php'),
-        ]);
+        ], 'config');
     }
 
     public function register() {

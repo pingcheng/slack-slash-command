@@ -56,4 +56,45 @@ class TestingCommand extends TestBase
             'channel_id' => 1232,
         ]);
     }
+
+    public function testUserIdPassCommand() {
+        $this->clearCommandConfig();
+        $this->loadTestingCommandConfig();
+        $manager = $this->getManager();
+
+        $result = $manager->process([
+            'command' => '/user_permission',
+            'user_id' => 1234,
+        ]);
+
+        $this->assertEquals('pass', $result);
+    }
+
+    public function testUserIdDenyCommand() {
+        $this->clearCommandConfig();
+        $this->loadTestingCommandConfig();
+        $this->expectException(\PingCheng\SlackSlashCommand\Exceptions\PermissionRequiredException::class);
+        $this->expectExceptionCode(403);
+        $manager = $this->getManager();
+
+        $manager->process([
+            'command' => '/user_permission',
+        ]);
+    }
+
+    public function testSlackMessageResponseCommand() {
+        $this->clearCommandConfig();
+        $this->loadTestingCommandConfig();
+        $manager = $this->getManager();
+
+        $response = $manager->process([
+            'command' => '/slack_message_response',
+        ]);
+
+        $this->assertTrue(is_array($response));
+        $this->assertArrayHasKey('text', $response);
+        $this->assertArrayHasKey('attachments', $response);
+        $this->assertEquals('test response', $response['text']);
+        $this->assertEquals([], $response['attachments']);
+    }
 }

@@ -23,7 +23,7 @@ class TestCommandManager extends TestBase
         $this->assertEquals(2, sizeof($list));
         $this->assertArrayHasKey('sample', $list);
         $this->assertArrayHasKey('channel', $list);
-        $this->assertContains(TestingSampleCommand::class, $list);
+        $this->assertContains(TestingSampleSlashCommand::class, $list);
     }
 
     public function testGetCommand() {
@@ -33,7 +33,7 @@ class TestCommandManager extends TestBase
 
         // testing get command class
         $command = $manager->getCommandClass('sample');
-        $this->assertEquals(TestingSampleCommand::class, $command);
+        $this->assertEquals(TestingSampleSlashCommand::class, $command);
 
         // testing get command name by payload
         $command = $manager->getCommandFromPayLoad([

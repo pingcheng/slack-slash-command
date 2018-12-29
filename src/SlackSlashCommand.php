@@ -4,7 +4,7 @@ namespace PingCheng\SlackSlashCommand;
 
 use PingCheng\SlackSlashCommand\Exceptions\PermissionRequiredException;
 
-abstract class SlackSlackCommand
+abstract class SlackSlashCommand
 {
     /*
      * Payload from slack
@@ -34,7 +34,7 @@ abstract class SlackSlackCommand
     abstract public function handle();
 
     /**
-     * SlackSlackCommand constructor.
+     * SlackSlashCommand constructor.
      *
      * @param $payload
      *
