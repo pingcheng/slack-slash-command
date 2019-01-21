@@ -20,6 +20,7 @@
                 <directory>./config</directory>
                 <directory>./vendor</directory>
                 <directory>./tests</directory>
+                <file>./src/RequestValidator.php</file>
                 <file>./src/SlackSlashCommandServiceProvider.php</file>
             </exclude>
         </whitelist>
