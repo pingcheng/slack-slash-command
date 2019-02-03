@@ -40,6 +40,13 @@ abstract class SlackSlashCommand
     protected $limit_on_user_ids = [];
 
     /**
+     * params parsed from text
+     *
+     * @var array
+     */
+    protected $params = [];
+
+    /**
      * need to be defined in the actual command class
      *
      * @return mixed
@@ -84,6 +91,8 @@ abstract class SlackSlashCommand
      * @param $payload
      */
     protected function loadPayload($payload) {
+
+        // define the fillable variables
         $fillable = [
             'token',
             'team_id',
@@ -99,11 +108,17 @@ abstract class SlackSlashCommand
             'response_url',
             'trigger'
         ];
+
+        // assign the variables from the request payload
         foreach ($payload as $key => $value) {
             if (in_array($key, $fillable) && property_exists($this, $key)) {
                 $this->$key = $value;
             }
         }
+
+        // merge continuous spaces and explode the result
+        $spaces_merged_text = preg_replace('!\s+!', ' ', $this->text);
+        $this->params = explode(' ', $spaces_merged_text);
     }
 
     /*
