@@ -23,7 +23,20 @@ abstract class SlackSlashCommand
     protected $response_url;
     protected $trigger;
 
+    /**
+     * limits on channel id
+     * only defined channel ids are allowed to perform this command
+     *
+     * @var array
+     */
     protected $limit_on_channel_ids = [];
+
+    /**
+     * limits on user id
+     * only defined user ids are allowed to perform this command
+     *
+     * @var array
+     */
     protected $limit_on_user_ids = [];
 
     /**
@@ -77,5 +90,117 @@ abstract class SlackSlashCommand
                 $this->$key = $value;
             }
         }
+    }
+
+    /*
+     * --------------------------------------------------------------------
+     *
+     * Slack slash command payload getters
+     *
+     * --------------------------------------------------------------------
+     */
+
+    /**
+     * @return mixed
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeamId()
+    {
+        return $this->team_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeamDomain()
+    {
+        return $this->team_domain;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnterpriseId()
+    {
+        return $this->enterprise_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnterpriseName()
+    {
+        return $this->enterprise_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChannelId()
+    {
+        return $this->channel_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChannelName()
+    {
+        return $this->channel_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserName()
+    {
+        return $this->user_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommand()
+    {
+        return $this->command;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponseUrl()
+    {
+        return $this->response_url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTrigger()
+    {
+        return $this->trigger;
     }
 }
