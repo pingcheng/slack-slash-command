@@ -84,7 +84,21 @@ abstract class SlackSlashCommand
      * @param $payload
      */
     protected function loadPayload($payload) {
-        $fillable = ['token', 'team_id', 'team_domain', 'enterprise_id', 'enterprise_name', 'channel_id', 'channel_name', 'user_id', 'user_name', 'command', 'text', 'response_url', 'trigger'];
+        $fillable = [
+            'token',
+            'team_id',
+            'team_domain',
+            'enterprise_id',
+            'enterprise_name',
+            'channel_id',
+            'channel_name',
+            'user_id',
+            'user_name',
+            'command',
+            'text',
+            'response_url',
+            'trigger'
+        ];
         foreach ($payload as $key => $value) {
             if (in_array($key, $fillable) && property_exists($this, $key)) {
                 $this->$key = $value;
