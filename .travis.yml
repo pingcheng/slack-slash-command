@@ -1,22 +1,39 @@
-language: php
+#language: php
+#
+#php:
+#  - 5.6
+#  - 7.0
+#  - 7.1
+#  - 7.2
+#
+#script:
+#  - composer create-project --prefer-dist laravel/laravel laravel_test
+#  - cd laravel_test
+#  - composer require pingcheng/slack-slash-command --prefer-source
+#  - php artisan vendor:publish --provider="PingCheng\SlackSlashCommand\SlackSlashCommandServiceProvider"
+#  - cd vendor
+#  - cd pingcheng
+#  - cd slack-slash-command
+#  - git checkout $TRAVIS_BRANCH
+#  - git branch
+#  - cat composer.json
+#  - composer install
+#  - php ../../../vendor/bin/phpunit
+#  - php vendor/bin/php-coveralls -v
 
-php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
+language: php
+dist: trusty
+sudo: false
+
+matrix:
+  include:
+    - php: 7.2
+      env: FRAMEWORK_VERSION=laravel/framework:5.7.*
+
+
+install:
+  - composer require "${FRAMEWORK_VERSION}" --no-update -n
+  - travis_retry composer install --no-suggest --prefer-dist -n -o
 
 script:
-  - composer create-project --prefer-dist laravel/laravel laravel_test
-  - cd laravel_test
-  - composer require pingcheng/slack-slash-command --prefer-source
-  - php artisan vendor:publish --provider="PingCheng\SlackSlashCommand\SlackSlashCommandServiceProvider"
-  - cd vendor
-  - cd pingcheng
-  - cd slack-slash-command
-  - git checkout $TRAVIS_BRANCH
-  - git branch
-  - cat composer.json
-  - composer install
-  - php ../../../vendor/bin/phpunit
-  - php vendor/bin/php-coveralls -v
+  php vendor/bin/phpunit
